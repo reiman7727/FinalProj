@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+.round{border-radius: 23px; 
+-moz-border-radius: 23px; 
+-webkit-border-radius: 23px; }
+.round:hover{text-decoration:underline; background-color: #52504E; cursor:pointer; color:white;}
+  </style>
+   <meta charset="UTF-8">
+  <title>Expense Log</title>
+
+
+    
+    
+    <link rel="stylesheet" href="css/reset.css">
+
+    
+        <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type='text/javascript'>
+function register()
+{
+
+$(location).attr('href', 'index2.html')
+
+
+
+}
+
+
+
+</script>
+<script>
+$(document).ready(function(){
+    var config = {
+    apiKey: "AIzaSyAbdY2ZkNiIwYJwDnDrbD0EyhL4L6RbXMk",
+    authDomain: "expenselog.firebaseapp.com",
+    databaseURL: "https://expenselog.firebaseio.com",
+    storageBucket: "",
+  };
+      firebase.initializeApp(config);
+      $("#submit").click(function(){
+        name = String($('#dUser').val())
+        pass = String($('#dPass').val())
+        console.log(name)
+        console.log(pass)
+      var ref = new Firebase("https://expenselog.firebaseio.com/");
+        ref.authWithPassword({
+          email    : name,
+          password : pass
+        }, function(error, authData) {
+          if (error) {
+            switch (error.code) {
+              case "INVALID_EMAIL":
+                 $('#display').text("The specified user account email is invalid.");
+                break;
+              case "INVALID_PASSWORD":
+                $('#display').text("The specified user account password is incorrect.");
+                break;
+              case "INVALID_USER":
+                 $('#display').text("The specified user account does not exist.");
+                break;
+              default:
+                $('#display').text("Error logging user in:", error);
+            }
+          } else {
+            console.log("Authenticated successfully with payload:", authData);
+            localStorage['user'] = authData.uid;
+            console.log(localStorage['user']);
+            $(location).attr('href', 'mainpage2.html')
+
+          }
+
+        });
+
+    })
+ })
+
+
+
+
+</script>
+    
+</head>
+
+<body>
+   <div class="container">
+  <div class="login">
+    <h1 class="login-heading">
+      <strong>Welcome.</strong> Please Login.</h1>
+     
+        <input type="text" name="DesiredUsername" placeholder="Username" id='dUser' required="required" class="input-txt" />
+          <input type="password" name="DesiredPassword" placeholder="Password" id="dPass" required="required" class="input-txt" />
+          <div class="login-footer">
+           <a href='index2.html'>
+           <button id="registrate" class="btn btn--left round" onClick='register()'>New? Click to Register</button>
+           </a>
+            <button  href='' id="submit" class="btn btn--right round">Login </button>
+    
+          </div>
+
+  
+      <div id ='display'></div>
+      <div id = 'buttons'>
+  <!-- Go to various other pages -->
+</div>
+  </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+  
+
+
+</html>
+

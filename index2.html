@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+  <title>Expense Log</title>
+ <style>
+.round{border-radius: 23px; 
+-moz-border-radius: 23px; 
+-webkit-border-radius: 23px; }
+.round:hover{text-decoration:underline; background-color: #52504E; cursor:pointer; color:white;}
+  </style>
+
+    
+    
+    <link rel="stylesheet" href="css/reset.css">
+
+    
+        <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    var config = {
+    apiKey: "AIzaSyAbdY2ZkNiIwYJwDnDrbD0EyhL4L6RbXMk",
+    authDomain: "expenselog.firebaseapp.com",
+    databaseURL: "https://expenselog.firebaseio.com",
+    storageBucket: "",
+  };
+      firebase.initializeApp(config);
+      $("#submit").click(function(){
+        name = String($('#dUser').val())
+        pass = String($('#dPass').val())
+        pass2 = String($('#dPass2').val())
+        if(pass!=pass2)
+          {$("#display").text("The passwords you entered did not match.");
+return;
+      }
+      else{
+        console.log(name)
+        console.log(pass)
+      var firebaseRef = new Firebase("https://expenselog.firebaseio.com/");
+      firebaseRef.createUser({
+      email    : name ,
+      password : pass
+    }, function(error, userData) {
+      if (error) {
+        $("#display").text(error);
+      } else {
+        $("#display").text("Successfully created user account!");
+        $(location).attr('href', 'mainpage2.html');
+      }
+    })};
+
+  })
+ })
+
+
+
+
+</script>
+    
+</head>
+
+<body>
+   <div class="container">
+  <div class="login">
+    <h1 class="login-heading">
+      <strong>Welcome.</strong> Please Register.</h1>
+     
+        <input type="text" name="DesiredUsername" placeholder="New Username" id='dUser' required="required" class="input-txt" />
+          <input type="password" name="DesiredPassword" placeholder="New Password" id="dPass" required="required" class="input-txt" />
+          <input type="password" name="DesiredPassword" placeholder="Reenter Password" id="dPass2" required="required" class="input-txt" />
+          <div class="login-footer">
+           
+            <button id="submit" class="btn btn--right round">Submit  </button>
+    
+          </div>
+
+  
+      <div id ='display'></div>
+      <div id = 'buttons'>
+  <!-- Go to various other pages -->
+</div>
+  </div>
+</div>
+<script src="js/index.js"></script>
+</body>
+  
+
+
+</html>

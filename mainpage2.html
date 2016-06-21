@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>2017rmclaren Homepage</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/creative.css" type="text/css">
+	<title>Home Sample</title>
+	<style>
+	body{
+		background-image:url('simple.jpg');
+		 margin:0px;
+	}
+	.button {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #002b6b), color-stop(1, #323333));
+	background:-moz-linear-gradient(top, #002b6b 5%, #323333 100%);
+	background:-webkit-linear-gradient(top, #002b6b 5%, #323333 100%);
+	background:-o-linear-gradient(top, #002b6b 5%, #323333 100%);
+	background:-ms-linear-gradient(top, #002b6b 5%, #323333 100%);
+	background:linear-gradient(to bottom, #002b6b 5%, #323333 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#002b6b', endColorstr='#323333',GradientType=0);
+	background-color:#002b6b;
+	border:2px solid #f5faf6;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:11px 31px;
+	text-decoration:none;
+	text-shadow:0px 2px 15px #2f6627;
+	opacity:.75;
+}
+.button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #323333), color-stop(1, #002b6b));
+	background:-moz-linear-gradient(top, #323333 5%, #002b6b 100%);
+	background:-webkit-linear-gradient(top, #323333 5%, #002b6b 100%);
+	background:-o-linear-gradient(top, #323333 5%, #002b6b 100%);
+	background:-ms-linear-gradient(top, #323333 5%, #002b6b 100%);
+	background:linear-gradient(to bottom, #323333 5%, #002b6b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#323333', endColorstr='#002b6b',GradientType=0);
+	background-color:#323333;
+	opacity:1;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+ .css-input { padding:3px; 
+ 	font-size:16px; 
+ 	border-width:2px; 
+ 	border-style:solid; 
+ 	border-color:#002b6b; 
+ 	text-shadow:0px 0px 0px 
+ 	rgba(42,42,42,.75);
+ 	 box-shadow: 6px 5px 7px 0px
+ 	  rgba(42,42,42,.81);  
+ 	} 
+		 .css-input:focus { outline:none; } 
+
+
+	.money{
+		margin:0 auto;
+		width:100%;
+		height:200px;
+		background-image: url('money.jpg');
+	}
+	.header{color:black;
+		    margin: 0 auto;
+    width: 100%;
+    height: 50px;
+    background-color: #002A6B;
+    margin-bottom: 0px;
+    font-size:32px;
+	}
+	.balance{
+		  font-size:22px;
+		margin: 0 auto;
+		width:100%;
+		color:white;
+		height: 130px;
+	font-family: "Times New Roman", Times, serif;
+
+	}
+	.border{
+		border-radius: 5px;
+		border-width: 3px;
+		border-color: black;
+	}
+	.transfer{ font-style: "font-awesome", Times, serif;
+		background-color: #f5f5ef;
+		width: 200px;
+		height:100px;
+		margin:0 auto;}
+	    .hehe{ font-family:Impact, Charcoal, sans-serif;
+	    font-size:200%;
+	       padding:10;
+	       margin:8;
+	        
+	        color:black;
+	    }
+	</style>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript">
+	var sign = -1;
+	var username = localStorage['user'];
+
+	$(document).ready(function(){
+		    var config = {
+		    apiKey: "AIzaSyAbdY2ZkNiIwYJwDnDrbD0EyhL4L6RbXMk",
+		    authDomain: "expenselog.firebaseapp.com",
+		    databaseURL: "https://expenselog.firebaseio.com",
+		    storageBucket: "",
+		  };
+		firebase.initializeApp(config);
+		var firebaseRef1 = new Firebase("https://expenselog.firebaseio.com/");
+
+		firebaseRef1.on("value", function(snapshot) {
+		   total = ((snapshot.val())['users'][String(username)]['totalFund']);
+		   		$('#balanceAmt').text(total);
+		}, function (errorObject) {
+		  console.log("The read failed: " + errorObject.code);
+		});
+	});
+
+	function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57)))
+        return false;
+    return true;
+	}
+
+	function unblur(transferType){
+		document.getElementById("editFields").style.opacity = "1";
+		if(transferType == "deposit"){
+			document.getElementById("confirm").value = "deposit";
+			document.getElementById("typeOfTransfer").innerHTML = "Deposit";
+			sign=1;
+		}
+		else{
+			document.getElementById("confirm").value ="withdraw";
+			document.getElementById("typeOfTransfer").innerHTML = "Withdraw";
+			sign=-1;
+		}
+	}
+
+function logout(){
+	var firebaseRef4 = new Firebase("https://expenselog.firebaseio.com/");
+	firebaseRef4.unauth();
+	$(location).attr('href', 'index.html');
+}
+
+	function add(){
+		var firebaseRef = new Firebase("https://expenselog.firebaseio.com/");
+		// console.log(localStorage['user']);
+
+
+
+		var table = document.getElementById("transferTable");
+		var row = table.insertRow();
+		var transfer = row.insertCell(0);
+		transfer.className = "space";
+		var amount = row.insertCell(1);
+		transfer.innerHTML = document.getElementById("name").value;
+		amount.innerHTML = "$"+document.getElementById("value").value;
+		for(var n=1; n < table.rows.length; n++)
+		{
+			if(n % 2 == 0)
+				table.rows[n].className = "even";
+			else
+				table.rows[n].className = "odd";
+		}
+		var total = parseFloat(document.getElementById("balanceAmt").innerHTML);
+		total = total.toFixed(2);
+		if(document.getElementById("confirm").value=="withdraw")
+			document.getElementById("balanceAmt").innerHTML = (total - parseFloat(document.getElementById("value").value)).toFixed(2);
+		else
+			document.getElementById("balanceAmt").innerHTML = (Number(total) + Number(parseFloat(document.getElementById("value").value))).toFixed(2);
+
+
+  		var total = 0;
+  		var change = $('#value').val()*sign;
+  		firebaseRef.on("value", function(snapshot) {
+		   total = ((snapshot.val())['users'][String(username)]['totalFund']);
+		   console.log(total)
+		}, function (errorObject) {
+		  console.log("The read failed: " + errorObject.code);
+		});
+
+
+		var finalval = total + change;
+		console.log(finalval);
+		//all works
+
+		firebaseRef.child("users").child(String(localStorage['user'])).update({
+				totalFund:finalval
+	        });
+
+document.getElementById("editFields").style.opacity = "0";}
+	</script>
+	
+	<style type="text/css">
+	.color{background-color: #004376; color: white;}
+	.even{background-color: white;}
+	.odd{background-color: #e6e6e6;}
+	.space{margin-right: 2px;}
+	#editFields{
+		opacity: 0;
+	}
+	</style>
+</head>
+<body>
+<center>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h class="navbar-brand page-scroll" >Bilbo Baggins Banking</h>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                  
+                <li>
+                        <button class="button page-scroll" value="deposit" onclick='unblur(value)' >Deposit</button>
+                    </li>
+                    <li>
+                        <button class="button page-scroll"  value="withdraw" onclick='unblur(value)' >Withdrawal</button>
+                    </li>
+                    <li>
+                    <button class="button page-scroll" onClick='logout()' >Logout</button>
+               </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div align='center' class='header'>
+           
+       
+        
+    </div>
+
+<div class='money'>
+</div>
+<div style='text-align:center'class='balance'>
+	<h1 style=' font-family: "Times New Roman", Times, serif;'>Balance: </h1
+	><h1  style='font-family: "Times New Roman", Times, serif;' id="balanceAmt">00.00</h1>
+
+</div>
+<div class='transfer'>
+</div>
+<div style='margin-bottom:20px'>
+	<table id="transferTable">
+		<tr  style='padding-right: 15px; padding-left: 15px;font-size: 22px; font-family: "Times New Roman", Times, serif; 'class = "color">
+			
+			<td  style='padding-right: 15px; padding-left: 15px;'class="border">
+				Transfers
+
+			</td>
+			<td style='padding-right: 15px; padding-left: 15px;' class="border">
+				Amount
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="editFields">
+	<h1 id="typeOfTransfer" style='font-family: "Times New Roman", Times, serif; font-size:30px;'></h1>
+	<div style='margin-bottom: 20px; font-size:20px'>
+	<label style='font-family: "Times New Roman", Times, serif; font-size: 24px;'>Description: </label>
+	<input class='css-input'name ="name" placeholder="For School" type="text" id="name">
+<label  style='padding-left:10px;'style='font-family: "Times New Roman", Times, serif; '>Amount: </label>
+	<input class='css-input' id= "value" name="value" placeholder='$00.00'type="number" onkeypress="return isNumberKey(event)"/>
+	
+	</div>
+	<div>
+	<button style='font-size:24px;'id="confirm" value ="" onclick="add()">Confirm</button>
+	</div>
+</div>
+</div>
+</center>
+</body>
+</html>
